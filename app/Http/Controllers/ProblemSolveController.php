@@ -14,15 +14,23 @@ class ProblemSolveController extends Controller
      * @param $id
      * @return Application|Factory|View
      */
-    public function solveProblem($id)
+    public function solveProblem($id): View|Factory|Application
     {
         if ($id == 1) {
             $problem_one_data = $this->solveProblemOne();
             return view('problem-one', compact('problem_one_data'));
         }
         if ($id == 2) {
-            return $problem_two_data = $this->solveProblemTwo();
+            $problem_two_data = $this->solveProblemTwo();
             return view('problem-two', compact('problem_two_data'));
+        }
+
+        if ($id == 3) {
+            $ip = "192.168.0.1";
+            $ipv4_validation_regex = "/^(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/";
+            $problem_three_data = preg_match($ipv4_validation_regex, $ip);
+
+            return view('problem-three', compact('problem_three_data'));
         }
     }
 
@@ -65,5 +73,13 @@ class ProblemSolveController extends Controller
             }
         }
         return $given_array;
+    }
+
+    /**
+     * solve problem number three
+     */
+    public function solveProblemThree()
+    {
+
     }
 }
