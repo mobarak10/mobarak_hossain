@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProblemSolveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/solution/{problem_number}', [ProblemSolveController::class, 'solveProblem'])->name('solve-problem');
 
 require __DIR__.'/auth.php';
